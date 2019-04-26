@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class AddtoCartTest extends CommonClassTest {
 
-    @Test
+    @Test(groups = "smoke")
     public void  Addproduct()
 
     {
