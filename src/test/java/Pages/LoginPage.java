@@ -13,12 +13,14 @@ public class LoginPage {
     }
 
 
-    public void login(String username, String password) {
-        driver.navigate().to("https://spree-vapasi.herokuapp.com");
+    public ProductListingPage login(String username, String password)
+    {
         driver.findElement(By.id("link-to-login")).click();
         driver.findElement(By.id("spree_user_email")).sendKeys(username);
         driver.findElement(By.id("spree_user_password")).sendKeys(password);
         driver.findElement(By.name("commit")).click();
+        return new ProductListingPage(driver);
+
 
     }
 }

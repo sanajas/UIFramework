@@ -3,9 +3,11 @@ package tests;
 
 
 import Pages.LoginPage;
+import Pages.ShoppingCartPage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import Pages.ProductListingPage;
 
 public class AddtoCartTest extends CommonClassTest {
 
@@ -14,26 +16,31 @@ public class AddtoCartTest extends CommonClassTest {
     {
 
         LoginPage login = new LoginPage(driver);
-        login.login("sanajas.siddiqui@gmail.com", "insha@17");
+
+        //login.login("sanajas.siddiqui@gmail.com", "insha@17");
+        String username = "sanajas.siddiqui@gmail.com";
+        String password = "insha@17";
+
         Assert.assertEquals("Spree Demo Site", driver.getTitle());
-        addproductstocart("Bags", "Ruby on Rails Tote");
-        driver.findElement(By.id("cart-detail")).findElement(By.linkText("Ruby on Rails Tote")).isDisplayed();
-        String Prodtext = driver.findElement(By.linkText("Ruby on Rails Tote")).getText();
-        Assert.assertEquals("Ruby on Rails Tote",Prodtext);
-        System.out.println("product is added"+Prodtext);
 
+        String aProduct = "Ruby on Rails Tote";
+        String cCategory = "Bags";
 
+        ProductListingPage page = new ProductListingPage(driver);
+        page.addproductstocart(cCategory, aProduct);
 
+        ProductDesPage proddes = new ProductDesPage(driver);
+
+        Assert.assertTrue(proddes.isDisplayed());
+        System.out.println("product is added"+aProduct);
+
+        ShoppingCartPage ShoppingCartPage = login.login(username,password).addproductstocart(cCategory,aProduct);
+
+        Assert.assertTrue(ShoppingCartPage.isDisplayed());
     }
 
 
 
-    private void addproductstocart(String category, final String products)
-    {
-        driver.findElement(By.linkText(category)).click();
-        driver.findElement(By.xpath("//span[contains(text(),'" + products + "')]")).click();
 
-        driver.findElement(By.id("add-to-cart-button")).click();
-    }
 
 }
