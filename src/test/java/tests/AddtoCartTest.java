@@ -29,9 +29,9 @@ public class AddtoCartTest extends CommonClassTest {
         ProductListingPage page = new ProductListingPage(driver);
         page.addproductstocart(cCategory, aProduct);
 
-        ProductDesPage proddes = new ProductDesPage(driver);
+        ProductDesPage proddescription = new ProductDesPage(driver);
 
-        Assert.assertTrue(proddes.isDisplayed());
+        Assert.assertTrue(proddescription.isDisplayed());
         System.out.println("product is added"+aProduct);
 
         ShoppingCartPage ShoppingCartPage = login.login(username,password).addproductstocart(cCategory,aProduct);
